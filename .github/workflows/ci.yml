@@ -1,0 +1,29 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ts-version: 4.1
+            node-version: 12
+          - ts-version: 4.1
+            node-version: 14
+          - ts-version: 4.1
+            node-version: 16
+          - ts-version: 4.2
+            node-version: 14
+          - ts-version: 4.3
+            node-version: 14
+    name: TS ${{ matrix.ts-version }}, Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm install --save-dev typescript@~${{ matrix.ts-version }}
+      - run: npm test

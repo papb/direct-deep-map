@@ -1,0 +1,27 @@
+{
+	"rules": {
+		"curly": "off",
+		"comma-dangle": ["error", "always-multiline"],
+		"padding-line-between-statements": "off",
+		"linebreak-style": ["error", "unix"],
+		"object-curly-spacing": ["error", "always"],
+		"unicorn/custom-error-definition": "error",
+		"unicorn/prevent-abbreviations": "off",
+		"unicorn/no-for-loop": "off",
+		"unicorn/prefer-number-properties": "off",
+		"unicorn/no-new-array": "off"
+	},
+	"overrides": [
+		{
+			"files": "**/*.ts",
+			"rules": {
+				"@typescript-eslint/comma-dangle": ["error", "always-multiline"],
+				"@typescript-eslint/no-non-null-assertion": "off",
+				"@typescript-eslint/consistent-indexed-object-style": "off",
+				"@typescript-eslint/no-require-imports": "off",
+				"@typescript-eslint/no-unsafe-return": "off",
+				"@typescript-eslint/object-curly-spacing": ["error", "always"]
+			}
+		}
+	]
+}

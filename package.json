@@ -1,6 +1,6 @@
 {
 	"name": "direct-deep-map",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "Deep map values in a tree directly on the desired places, with strong TypeScript support.",
 	"license": "MIT",
 	"repository": "papb/direct-deep-map",

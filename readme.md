@@ -2,13 +2,11 @@
 
 > Deep map values in a tree directly on the desired places, with strong TypeScript support. Original tree is unchanged.
 
-
 ## Install
 
 ```
 $ npm install direct-deep-map
 ```
-
 
 ## Usage
 
@@ -18,23 +16,23 @@ const { directDeepMap } = require('direct-deep-map');
 const tree = {
     items: [
         {
-            foo: { bar: 4 }
+            foo: { bar: 4 },
         },
         {
-            foo: { bar: 7, baz: true }
+            foo: { bar: 7, baz: true },
         },
         {
-            foo: { baz: 'hello' }
-        }
-    ]
+            foo: { baz: 'hello' },
+        },
+    ],
 };
 
 const tripleBarsMapper = {
     items: [
         {
-            foo: { bar: x => 3 * x }
-        }
-    ]
+            foo: { bar: x => 3 * x },
+        },
+    ],
 };
 
 const newTree = directDeepMap(tree, tripleBarsMapper);
@@ -58,7 +56,6 @@ console.log(tree !== newTree);
 //=> true
 ```
 
-
 ## API
 
 ### directDeepMap(tree, deepMapper)
@@ -79,7 +76,6 @@ A tree-structure resembling the tree to be modified, but whose leaves are the ma
 
 The original tree will be traversed in BFS order and the corresponding mapper function within `deepMapper` (if present) will be used to transform the values.
 
-
 ## TypeScript support
 
 This module supports TypeScript by default. The return type of the `directDeepMap` method is properly constructed. Example:
@@ -99,15 +95,15 @@ type OriginalTreeType = {
 const tree: OriginalTreeType = {
     items: [
         {
-            foo: { bar: [1, 2, 3] }
+            foo: { bar: [1, 2, 3] },
         },
         {
-            foo: { bar: [4, 5], baz: true }
+            foo: { bar: [4, 5], baz: true },
         },
         {
-            foo: { baz: false }
-        }
-    ]
+            foo: { baz: false },
+        },
+    ],
 };
 
 const newTree = directDeepMap(tree, {
@@ -115,10 +111,10 @@ const newTree = directDeepMap(tree, {
         {
             foo: {
                 // Type of `x` is automatically inferred to be `number[] | undefined` here
-                bar: x => x!.join('-')
-            }
-        }
-    ]
+                bar: x => x!.join('-'),
+            },
+        },
+    ],
 });
 type NewTreeType = typeof newTree;
 //=> {
@@ -137,46 +133,43 @@ Note that, in the example above, the mapper was defined as an object inline with
 const tree: OriginalTreeType = {
     items: [
         {
-            foo: { bar: [1, 2, 3] }
+            foo: { bar: [1, 2, 3] },
         },
         {
-            foo: { bar: [4, 5], baz: true }
+            foo: { bar: [4, 5], baz: true },
         },
         {
-            foo: { baz: false }
-        }
-    ]
+            foo: { baz: false },
+        },
+    ],
 };
 
 const mapper = {
     items: [
         {
             foo: {
-                bar: (x?: number[]) => x!.join('-')
-            }
-        }
-    ]
+                bar: (x?: number[]) => x!.join('-'),
+            },
+        },
+    ],
 } as const;
 
 const newTree = directDeepMap(tree, mapper);
 ```
 
-
 ## Known issues & roadmap for v1.0.0
 
-* Support circular references (currently, the call will hang)
-* Support `Set`
-* Support `Map`
-* Improve documentation adding more examples
-* Support modifying the tree in-place instead of deep-cloning via an option (false by default)
-* Provide element index as second argument to the mapper function when mapping over elements in an array
-
+-   Support circular references (currently, the call will hang)
+-   Support `Set`
+-   Support `Map`
+-   Improve documentation adding more examples
+-   Support modifying the tree in-place instead of deep-cloning via an option (false by default)
+-   Provide element index as second argument to the mapper function when mapping over elements in an array
 
 ## Related
 
-* [`deep-map`](https://github.com/mcmath/deep-map): Map over all primitive leaf values in a tree (instead of specifying specific positions since the beginning) - more flexible but less precise TypeScript typings.
-* [`tree-shortcut`](https://github.com/papb/tree-shortcut): Simplify an object tree with a shortcut. TypeScript supported.
-
+-   [`deep-map`](https://github.com/mcmath/deep-map): Map over all primitive leaf values in a tree (instead of specifying specific positions since the beginning) - more flexible but less precise TypeScript typings.
+-   [`tree-shortcut`](https://github.com/papb/tree-shortcut): Simplify an object tree with a shortcut. TypeScript supported.
 
 ## License
 

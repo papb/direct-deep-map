@@ -53,10 +53,12 @@ test('Readme example', t => {
 
 test('Basic usage', t => {
 	const result = directDeepMap(
+		// prettier-ignore
 		{ a: [{ b: 'hi', c: 123 }, { d: 'hey', b: 'there' }] } as const,
 		{ a: [{ b: () => 'hello' as const }] } as const,
 	);
 
+	// prettier-ignore
 	const expectedResult = { a: [{ b: 'hello', c: 123 }, { d: 'hey', b: 'hello' }] } as const;
 
 	expectTypeOf(result).toEqualTypeOf(expectedResult);
@@ -138,6 +140,7 @@ test('TypeScript support', t => {
 });
 
 test('Does not modify input', t => {
+	// prettier-ignore
 	const tree = { a: [{ b: 'hi', c: 123 }, { d: 'hey', b: 'there' }] };
 	const treeMemo = cloneDeep(tree);
 
@@ -151,6 +154,7 @@ test('Does not modify input', t => {
 });
 
 test('Does not mess with non-plain objects', t => {
+	// prettier-ignore
 	expectTypeOf<MappedTree<{ foo: Date; bar: Date }, { foo: { getTime: () => 'modified' } }>>()
 		.toEqualTypeOf<{ foo: Date; bar: Date }>();
 
@@ -171,21 +175,25 @@ test('Does not mess with non-plain objects', t => {
 });
 
 test('Leaves non-trees untouched', t => {
+	// prettier-ignore
 	expectTypeOf<MappedTree<Date, { a: () => 1 }>>()
 		.toEqualTypeOf<Date>();
 
+	// prettier-ignore
 	expectTypeOf<MappedTree<Date, { getTime: () => string }>>()
 		.toEqualTypeOf<Date>();
 
+	// prettier-ignore
 	expectTypeOf<MappedTree<number, { a: () => 1 }>>()
 		.toEqualTypeOf<number>();
 
+	// prettier-ignore
 	expectTypeOf<MappedTree<undefined, { a: () => 1 }>>()
 		.toEqualTypeOf<undefined>();
 
 	const date = new Date();
 
-	// @ts-expect-error
-	t.is(directDeepMap(date, { getTime: () => 'modified' } as any), date); // eslint-disable-line @typescript-eslint/no-unsafe-argument
+	// @ts-expect-error TS complains about the following call, as intended
+	t.is(directDeepMap(date, { getTime: () => 'modified' }), date);
 	t.is(typeof date.getTime, 'function');
 });

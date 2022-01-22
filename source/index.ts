@@ -1,5 +1,6 @@
 import { isPlainObject, AnyPlainObject } from './is-plain-object';
 
+// prettier-ignore
 type LooseMapper = readonly [((value: any) => any) | LooseMapper] | {
 	[key: string]: ((value: any) => any) | LooseMapper;
 };
@@ -21,6 +22,7 @@ function assertLooseMapper(mapper: unknown): asserts mapper is LooseMapper {
 
 type CastAsLooseMapper<T> = T extends LooseMapper ? T : never;
 
+// prettier-ignore
 export type MappedTree<T, Tr> =
 	Tr extends LooseMapper
 		? T extends readonly any[]
@@ -52,12 +54,12 @@ function directDeepMapHelper(tree: any, mapper: any): any {
 	if (!isPlainObject(tree)) return tree;
 	const result: AnyPlainObject = {};
 	for (const key of Object.keys(tree)) {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		result[key] = mapper[key] ? directDeepMapHelper(tree[key], mapper[key]) : tree[key];
 	}
 	return result;
 }
 
+// prettier-ignore
 export type Mapper<T> =
 	T extends ReadonlyArray<infer X>
 		? readonly [((value: X) => any) | Mapper<X>]

@@ -17,6 +17,10 @@ jobs:
             node-version: 14
           - ts-version: 4.3
             node-version: 14
+          - ts-version: 4.4
+            node-version: 14
+          - ts-version: 4.5
+            node-version: 14
     name: TS ${{ matrix.ts-version }}, Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     steps:

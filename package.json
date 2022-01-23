@@ -17,8 +17,7 @@
 		"release": "npm run build && np --no-yarn --no-2fa --no-cleanup",
 		"lint": "tsc --noEmit && eslint . --max-warnings 0 && prettier --check .",
 		"prettier": "prettier --write .",
-		"ava": "npm run build && ava",
-		"test": "npm run lint && npm run ava"
+		"test": "npm run lint && npm run build && ava"
 	},
 	"main": "dist/source",
 	"types": "dist/source",

@@ -6,22 +6,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - ts-version: 4.1
-            node-version: 12
-          - ts-version: 4.1
-            node-version: 14
-          - ts-version: 4.1
-            node-version: 16
-          - ts-version: 4.2
-            node-version: 14
-          - ts-version: 4.3
-            node-version: 14
-          - ts-version: 4.4
-            node-version: 14
-          - ts-version: 4.5
-            node-version: 14
-    name: TS ${{ matrix.ts-version }}, Node.js ${{ matrix.node-version }}
+        node-version:
+          - 12
+          - 14
+          - 16
+    name: Main Test - Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,5 +18,27 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm install --save-dev typescript@~${{ matrix.ts-version }}
       - run: npm test
+  ts-compat:
+    strategy:
+      fail-fast: false
+      matrix:
+        ts-version:
+          - 4.5
+          - 4.4
+          - 4.3
+          - 4.2
+          - 4.1
+          - 4.0
+          - 3.9
+    name: Compatibility with TS ${{ matrix.ts-version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run build
+      - run: npm install --save-dev typescript@~${{ matrix.ts-version }}
+      - run: npx ava

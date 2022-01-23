@@ -193,7 +193,6 @@ test('Leaves non-trees untouched', t => {
 
 	const date = new Date();
 
-	// @ts-expect-error TS complains about the following call, as intended
-	t.is(directDeepMap(date, { getTime: () => 'modified' }), date);
+	t.is(directDeepMap(date, { getTime: () => 'modified' } as unknown as never), date);
 	t.is(typeof date.getTime, 'function');
 });

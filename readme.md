@@ -8,7 +8,7 @@
 $ npm install direct-deep-map
 ```
 
-Note: if you're using TypeScript, you will need TypeScript 4.1 or above (tested until 4.5).
+Note: if you're using TypeScript, you will need TypeScript 3.7 or above.
 
 ## Usage
 
